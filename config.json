@@ -1,11 +1,8 @@
 {
   "prefix": "/",
-  "token": "MTA4Mzg1NTgyNDA0MjA3ODMxMQ.GddZxR.BlxYJc8dlf6-PT9dL0eLZy-HV-8huQYujdgECo",
-  "permissions": "274877975552",
-  "application_id": "1083855824042078311",
+  "token": "",
+  "permissions": "",
+  "application_id": "",
   "sync_commands_globally": true,
-  "owners": [
-    747992644017324063,
-    671115030313304086
-  ]
+  "owners": []
 }
