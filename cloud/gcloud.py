@@ -2,6 +2,7 @@ import sys
 from collections import defaultdict
 from typing import Any, Dict, Iterable
 
+from google.api_core import retry
 from google.api_core.extended_operation import ExtendedOperation
 from google.cloud import compute_v1
 
@@ -61,7 +62,7 @@ def wait_for_extended_operation(operation: ExtendedOperation, verbose_name: str 
         In case of an operation taking longer than `timeout` seconds to complete,
         a `concurrent.futures.TimeoutError` will be raised.
     """
-    result = operation.result(timeout=timeout)
+    result = operation.result(timeout=timeout, retry=retry.Retry(deadline=60))
 
     if operation.error_code:
         print(

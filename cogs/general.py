@@ -78,12 +78,12 @@ class General(commands.Cog, name="general"):
         description="Start the server with the given name.",
     )
     @checks.not_blacklisted()
-    async def start(self, context: Context, question: str) -> None:
+    async def start(self, context: Context, server: str) -> None:
         instances = cloud.gcloud.list_all_instances(ProjectID)
         for zone in instances:
             for i in instances[zone]:
                 name = i.name.lower().split("-")[0]
-                if question.lower() == name:
+                if server.lower() == name:
                     if i.status == "RUNNING":
                         embed = discord.Embed(
                             title=f"{name} server is already running.",
@@ -98,7 +98,7 @@ class General(commands.Cog, name="general"):
                             color=0x00FF00,
                         )
                         await context.send(embed=embed)
-                        cloud.gcloud.start_instance(ProjectID, i.zone, i.name)
+                        cloud.gcloud.start_instance(ProjectID, i.zone.split("/")[-1], i.name)
                     else:
                         embed = discord.Embed(
                             title=f"Cannot start {name}.",
